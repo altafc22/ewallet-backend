@@ -5,20 +5,6 @@ app.use(express.json());
 
 require("dotenv").config();
 
-// Import Routes for eWallet API
-const authRoutes = require("./routes/authRoutes");
-const userRoutes = require("./routes/userRoutes");
-const benefitiariesRoutes = require("./routes/benefitiariesRoutes");
-const transactionsRoutes = require("./routes/transactionsRoutes");
-
-// Mount the API routes
-app.use("/api/v1/auth", authRoutes);
-
-const authenticateToken = require("./middlewares/authenticateToken");
-app.use("/api/v1/users", authenticateToken, userRoutes);
-app.use("/api/v1/beneficiaries", authenticateToken, benefitiariesRoutes);
-app.use("/api/v1/transactions", authenticateToken, transactionsRoutes);
-
 // Connect to the database
 const dbConnect = require("./config/database");
 
@@ -46,3 +32,17 @@ app.listen(PORT, () => {
 app.get("/", (req, res) => {
   res.send(`<h1>Welcome to eWallet App</h1>`);
 });
+
+// Import Routes for eWallet API
+const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
+const benefitiariesRoutes = require("./routes/benefitiariesRoutes");
+const transactionsRoutes = require("./routes/transactionsRoutes");
+
+// Mount the API routes
+app.use("/api/v1/auth", authRoutes);
+
+const authenticateToken = require("./middlewares/authenticateToken");
+app.use("/api/v1/users", authenticateToken, userRoutes);
+app.use("/api/v1/beneficiaries", authenticateToken, benefitiariesRoutes);
+app.use("/api/v1/transactions", authenticateToken, transactionsRoutes);
