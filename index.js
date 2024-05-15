@@ -34,6 +34,9 @@ const utcTime = moment.utc();
 const localTime = utcTime.tz("Asia/Dubai");
 console.log("Local Time (Dubai):", localTime.format());
 
+const cors = require("cors");
+app.use(cors());
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server Started Successfully at  Port http://localhost:${PORT}`);
